@@ -2,7 +2,12 @@
 
 Das ist ein kleines Testprogramm zum Ausprobieren verschiedener Features von Svelte, insbesondere Reaktivität und die Kommunikation zwischen Komponenten. Es ist in Svelte 4 entwickelt, nutzt also nicht den **runes mode**.
 
-## Voraussetzungen
+## Direkt auf GitHub Pages ausprobieren
+
+Das Spiel ist auf GitHib Pages veröffentlicht, und kann von dort direkt im Browser gestartet werden:  
+https://grubi.github.io/nimmspiel/
+
+## Lokal ausführen: Voraussetzungen
 
 - Node.js (empfohlen: Version 18 oder höher)
 - Ein Paketmanager wie npm (wird mit Node.js mitgeliefert)
