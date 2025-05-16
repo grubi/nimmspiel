@@ -1,6 +1,6 @@
 # Nimmspiel
 
-Das ist ein kleines Testprogramm zum ausprobieren verschiedener Features von Svelte, insbesondere Reaktivität und die Kommunikation zwischen Komponenten. Es ist in Svelte 4 entwickelt, nutzt also nicht den **runes mode**.
+Das ist ein kleines Testprogramm zum Ausprobieren verschiedener Features von Svelte, insbesondere Reaktivität und die Kommunikation zwischen Komponenten. Es ist in Svelte 4 entwickelt, nutzt also nicht den **runes mode**.
 
 ## Voraussetzungen
 
@@ -22,6 +22,6 @@ Die Anwendung ist dann im Browser unter http://localhost:5173 erreichbar.
 
 ## Spielregeln
 
-**Nimmspiel** wird klassischerweise mit Streichhölzern gespielt. Man legt eine gewisse Anzhal von Hölzchen auf den Tisch (z.B. 50). Zwei Spieler düfen abwechselnd Hölzchen vom Haufen nehmen. Dabei muss der Spieler, der am Zug ist, jeweils mindestens ein Hölzchen nehmen (Aussetzen ist also nicht erlaubt), und er darf auch nur eine maximale Anzhal von Hölchen pro Zug nehmen (z.B. 10).
+**Nimmspiel** wird klassischerweise mit Streichhölzern gespielt. Man legt eine gewisse Anzahl von Hölzchen auf den Tisch (z.B. 50). Zwei Spieler düfen abwechselnd Hölzchen vom Haufen nehmen. Dabei muss der Spieler, der am Zug ist, jeweils mindestens ein Hölzchen nehmen (aussetzen ist also nicht erlaubt), und er darf auch nur eine maximale Anzahl von Hölzchen pro Zug nehmen (z.B. 10).
 
-Der Spieler, der gezwungen ist das letzte Hölzchen zu nehmen, hat verloren. Oder anders gesagt: Der Spieler, der es schafft dass für seinen Gegner nur ein einziges Hölzchen übrig bleibt, gewinnt.
+Der Spieler, der gezwungen ist das letzte Hölzchen zu nehmen, hat verloren. Oder anders gesagt: Der Spieler der es schafft, dass für seinen Gegner nur ein einziges Hölzchen übrig bleibt, gewinnt.
