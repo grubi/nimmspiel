@@ -4,9 +4,10 @@
 	let count = initialCount;
 	let playerTake = null;
 	let computerTake = null;
-	let interactive = true;
+	let interactive;
 	let gameOver = false;
-	let playerWins = false;
+	let playerWins;
+	let playersMove;
 	const delayTime = 2000;
 
 	// Timer
@@ -19,21 +20,20 @@
 	import { onDestroy } from 'svelte';
 	onDestroy(cleanUpTimer);
 	
+	// Initialize first move
 	if(computerBegins) {
+		playersMove = false;
 		interactive = false;
-		if(count==1) {
-			gameOver = true;
-		}
-		else {
-			timerId = setTimeout(computerMove, delayTime);
-		}
+		timerId = setTimeout(computerMove, delayTime);
 	}
 	else {
+		playersMove = true;
+		interactive = true;
 		if(count==1) {
 			interactive = false;
 			playerTake = 0;
 			gameOver = true;
-			playerWins = true;
+			playerWins = false;
 		}
 	}
 
@@ -41,33 +41,37 @@
 		playerTake = event.detail.take;
 		count -= playerTake;
 		interactive = false;
-		if(count===1) {
-			gameOver = true;
-			playerWins = true;
-		}
-		else {
-			timerId = setTimeout(computerMove, delayTime);
-		}
+		playersMove = false;
+		timerId = setTimeout(computerMove, delayTime);
 	}
 
 	function computerMove() {
-		let take = (count-1) % (takeMax+1);
-		if(take===0) {
-			take = Math.floor(Math.random()*takeMax)+1;
+		if(count==1) {
+			gameOver = true;
+			playerWins = true;
 		}
-		computerTake = take;
-		timerId = setTimeout(finalizeComputerMove, delayTime);
+		else
+		{
+			let take = (count-1) % (takeMax+1);
+			if(take===0) {
+				take = Math.floor(Math.random()*takeMax)+1;
+			}
+			computerTake = take;
+			timerId = setTimeout(finalizeComputerMove, delayTime);
+		}
 	}
 
 	function finalizeComputerMove() {
 		count -= computerTake;
 		if(count===1) {
 			gameOver = true;
+			playerWins = false;
 		}
 		else {
 			computerTake = null;
 			playerTake = null;
 			interactive = true;
+			playersMove = true;
 		}
 	}
 </script>
@@ -84,28 +88,27 @@
 	<Matches on:take={handleTake} {count} {takeMax} bind:interactive displayTake={gameOver ? null: computerTake} />
 </p>
 {#if playerTake!=null}
-	<div style="color: blue">
 	{#if playerTake!=0}
-		<p><strong>Du nimmst {playerTake}.</strong></p>
+		<div style="color: blue">
+		<strong>Du nimmst {playerTake}.</strong>
+		</div>
 	{/if}
-	{#if playerWins}
-		<h1>Du hast gewonnen!</h1>
-	{/if}
+{/if}
+{#if gameOver && playerWins}
+	<div style="color: green">
+	<h1>Du hast gewonnen!</h1>
 	</div>
 {/if}
-{#if computerTake || (computerBegins && count===initialCount)}
-	<div style="color: red">
-		{#if computerTake}
-			<p><strong style="color: red">Ich nehme {computerTake}.</strong></p>
-		{:else}
-			<p><strong style="color: red">Ich denke nach...</strong></p>
-		{/if}
-		{#if gameOver}
-			<h1>Ich habe gewonnen!</h1>
-		{/if}
-	</div>
+{#if computerTake}
+	<div style="color: red"><strong>Ich nehme {computerTake}.</strong></div>
 {/if}
-{#if !(playerTake || computerTake) && interactive}
+{#if !computerTake && !playersMove && !gameOver}
+	<div style="color: red"><strong>Ich denke nach...</strong></div>
+{/if}
+{#if gameOver && !playerWins}
+	<div style="color: red"><h1>Du hast verloren!</h1></div>
+{/if}
+{#if playersMove && !playerTake && interactive}
 	<p>
 		Klicke auf das Hölzchen, das du nehmen willst.<br>
 		Alle rechts davon werden ebenfalls genommen.
